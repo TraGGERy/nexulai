@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import { useState } from "react";
 import { useUser } from '@clerk/nextjs';
 import Link from 'next/link';
@@ -308,17 +308,17 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="bg-white p-5 sm:p-6 rounded-lg shadow-lg">
               <div className="text-yellow-400 mb-3 sm:mb-4">⭐⭐⭐⭐⭐</div>
-              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">"Got better insights in 15 minutes than our previous 6-month McKinsey engagement. Saved us $200K and 5 months."</p>
+              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">&quot;Got better insights in 15 minutes than our previous 6-month McKinsey engagement. Saved us $200K and 5 months.&quot;</p>
               <div className="text-sm sm:text-base font-semibold">Sarah Chen, CEO TechStart</div>
             </div>
             <div className="bg-white p-5 sm:p-6 rounded-lg shadow-lg">
               <div className="text-yellow-400 mb-3 sm:mb-4">⭐⭐⭐⭐⭐</div>
-              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">"The AI analysis was spot-on. Implemented their recommendations and saw 40% efficiency improvement within a month."</p>
+              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">&quot;The AI analysis was spot-on. Implemented their recommendations and saw 40% efficiency improvement within a month.&quot;</p>
               <div className="text-sm sm:text-base font-semibold">Marcus Rodriguez, COO GlobalCorp</div>
             </div>
             <div className="bg-white p-5 sm:p-6 rounded-lg shadow-lg">
               <div className="text-yellow-400 mb-3 sm:mb-4">⭐⭐⭐⭐⭐</div>
-              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">"Finally, consulting that fits our startup budget and timeline. The quality rivals top-tier firms."</p>
+              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">&quot;Finally, consulting that fits our startup budget and timeline. The quality rivals top-tier firms.&quot;</p>
               <div className="text-sm sm:text-base font-semibold">Emily Watson, Founder InnovateLab</div>
             </div>
           </div>

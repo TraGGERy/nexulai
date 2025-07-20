@@ -2,6 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function AITools() {
   const { user } = useUser();
@@ -21,12 +22,12 @@ export default function AITools() {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/solutions" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Solutions</a>
-                <a href="/ai-tools" className="text-purple-600 px-3 py-2 text-sm font-medium border-b-2 border-purple-600">AI Tools</a>
-                <a href="/pricing" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Pricing</a>
-                <a href="/dashboard" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Dashboard</a>
+                <Link href="/solutions" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Solutions</Link>
+                <Link href="/ai-tools" className="text-purple-600 px-3 py-2 text-sm font-medium border-b-2 border-purple-600">AI Tools</Link>
+                <Link href="/pricing" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Pricing</Link>
+                <Link href="/dashboard" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Dashboard</Link>
                 {!user && (
-                  <a href="/sign-up" className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-700">Start Free Analysis</a>
+                  <Link href="/sign-up" className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-700">Start Free Analysis</Link>
                 )}
               </div>
             </div>
@@ -55,12 +56,12 @@ export default function AITools() {
           {mobileMenuOpen && (
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="/solutions" className="text-gray-900 hover:text-purple-600 block px-3 py-2 text-base font-medium">Solutions</a>
-                <a href="/ai-tools" className="text-purple-600 block px-3 py-2 text-base font-medium border-l-4 border-purple-600 pl-2">AI Tools</a>
-                <a href="/pricing" className="text-gray-900 hover:text-purple-600 block px-3 py-2 text-base font-medium">Pricing</a>
-                <a href="/dashboard" className="text-gray-900 hover:text-purple-600 block px-3 py-2 text-base font-medium">Dashboard</a>
+                <Link href="/solutions" className="text-gray-900 hover:text-purple-600 block px-3 py-2 text-base font-medium">Solutions</Link>
+                <Link href="/ai-tools" className="text-purple-600 block px-3 py-2 text-base font-medium border-l-4 border-purple-600 pl-2">AI Tools</Link>
+                <Link href="/pricing" className="text-gray-900 hover:text-purple-600 block px-3 py-2 text-base font-medium">Pricing</Link>
+                <Link href="/dashboard" className="text-gray-900 hover:text-purple-600 block px-3 py-2 text-base font-medium">Dashboard</Link>
                 {!user && (
-                  <a href="/sign-up" className="bg-purple-600 text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-700 mt-4">Start Free Analysis</a>
+                  <Link href="/sign-up" className="bg-purple-600 text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-700 mt-4">Start Free Analysis</Link>
                 )}
               </div>
             </div>
@@ -123,9 +124,9 @@ export default function AITools() {
                 </div>
               </div>
               {!user ? (
-                <a href="/sign-up" className="block w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors text-center">
+                <Link href="/sign-up" className="block w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors text-center">
                   Sign in to Try Strategy AI
-                </a>
+                </Link>
               ) : (
                 <button className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
                   Try Strategy AI Free
@@ -160,13 +161,13 @@ export default function AITools() {
                 </div>
               </div>
               {!user ? (
-                <a href="/sign-up" className="block w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center">
+                <Link href="/sign-up" className="block w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center">
                   Sign in to Try Market AI
-                </a>
+                </Link>
               ) : (
-                <a href="/market-intelligence" className="block w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center">
+                <Link href="/market-intelligence" className="block w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center">
                   Try Market AI Free
-                </a>
+                </Link>
               )}
             </div>
           </div>
@@ -213,9 +214,9 @@ export default function AITools() {
                 </div>
               </div>
               {!user ? (
-                <a href="/sign-up" className="block w-full bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors text-center">
+                <Link href="/sign-up" className="block w-full bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors text-center">
                   Sign in to Explore
-                </a>
+                </Link>
               ) : (
                 <button className="w-full bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
                   Explore Tools
@@ -251,9 +252,9 @@ export default function AITools() {
                 </div>
               </div>
               {!user ? (
-                <a href="/sign-up" className="block w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center">
+                <Link href="/sign-up" className="block w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center">
                   Sign in to Explore
-                </a>
+                </Link>
               ) : (
                 <button className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                   Explore Tools
@@ -289,13 +290,13 @@ export default function AITools() {
                 </div>
               </div>
               {!user ? (
-                <a href="/sign-up" className="block w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center">
+                <Link href="/sign-up" className="block w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center">
                   Sign in to Explore
-                </a>
+                </Link>
               ) : (
-                <a href="/market-intelligence" className="block w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center">
+                <Link href="/market-intelligence" className="block w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center">
                   Explore Tools
-                </a>
+                </Link>
               )}
             </div>
 
@@ -328,9 +329,9 @@ export default function AITools() {
                 </div>
               </div>
               {!user ? (
-                <a href="/sign-up" className="block w-full bg-orange-600 text-white py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors text-center">
+                <Link href="/sign-up" className="block w-full bg-orange-600 text-white py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors text-center">
                   Sign in to Explore
-                </a>
+                </Link>
               ) : (
                 <button className="w-full bg-orange-600 text-white py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
                   Explore Tools
@@ -366,9 +367,9 @@ export default function AITools() {
                 </div>
               </div>
               {!user ? (
-                <a href="/sign-up" className="block w-full bg-pink-600 text-white py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors text-center">
+                <Link href="/sign-up" className="block w-full bg-pink-600 text-white py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors text-center">
                   Sign in to Explore
-                </a>
+                </Link>
               ) : (
                 <button className="w-full bg-pink-600 text-white py-2 rounded-lg font-semibold hover:bg-pink-700 transition-colors">
                   Explore Tools
@@ -404,9 +405,9 @@ export default function AITools() {
                 </div>
               </div>
               {!user ? (
-                <a href="/sign-up" className="block w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors text-center">
+                <Link href="/sign-up" className="block w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors text-center">
                   Sign in to Explore
-                </a>
+                </Link>
               ) : (
                 <button className="w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                   Explore Tools
@@ -443,9 +444,9 @@ export default function AITools() {
               </div>
               <div className="flex space-x-4">
                 {!user ? (
-                  <a href="/sign-up" className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                  <Link href="/sign-up" className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
                     Sign in for API Key
-                  </a>
+                  </Link>
                 ) : (
                   <button className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
                     Get API Key
@@ -492,9 +493,9 @@ export default function AITools() {
                 <h4 className="text-lg font-semibold text-gray-900 mb-3">White-Label Solutions</h4>
                 <p className="text-gray-600 mb-4">Embed our AI tools in your platform with your branding.</p>
                 {!user ? (
-                  <a href="/sign-up" className="bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
+                  <Link href="/sign-up" className="bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
                     Sign in to Contact Sales
-                  </a>
+                  </Link>
                 ) : (
                   <button className="bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
                     Contact Sales
@@ -548,18 +549,18 @@ export default function AITools() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
             {!user ? (
-              <a href="/sign-up" className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg shadow-lg inline-block">
+              <Link href="/sign-up" className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg shadow-lg inline-block">
                 Start Free Analysis
-              </a>
+              </Link>
             ) : (
-              <a href="/dashboard" className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg shadow-lg inline-block">
+              <Link href="/dashboard" className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-lg shadow-lg inline-block">
                 Go to Dashboard
-              </a>
+              </Link>
             )}
             {!user ? (
-              <a href="/sign-up" className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors text-lg inline-block">
+              <Link href="/sign-up" className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors text-lg inline-block">
                 Sign in to View API Docs
-              </a>
+              </Link>
             ) : (
               <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors text-lg">
                 View API Docs

@@ -60,12 +60,9 @@ export async function GET() {
     }
 
     // Calculate daily reports left
-    let dailyReportsLeft = subscriptionStatus.dailyReportsLimit;
-    
-    if (!subscriptionStatus.isSubscribed) {
-      // Free users have a limit of 3 reports per day
-      dailyReportsLeft = Math.max(0, 3 - subscriptionStatus.dailyReportsCount);
-    }
+    const dailyReportsLeft = !subscriptionStatus.isSubscribed
+      ? Math.max(0, 3 - subscriptionStatus.dailyReportsCount)
+      : subscriptionStatus.dailyReportsLimit;
 
     return NextResponse.json({
       ...subscriptionStatus,

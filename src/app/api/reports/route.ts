@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     
     // Validate type if provided
     const validTypes = reportTypeEnum.enumValues;
-    if (type && !validTypes.includes(type as any)) {
+    if (type && !validTypes.includes(type as typeof reportTypeEnum.enumValues[number])) {
       return NextResponse.json({
         success: false,
         message: `Invalid report type. Valid types are: ${validTypes.join(', ')}`
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     }
     
     // Get user from database
-    let userResult = await db.select()
+    const userResult = await db.select()
       .from(users)
       .where(eq(users.clerkId, clerkId));
     

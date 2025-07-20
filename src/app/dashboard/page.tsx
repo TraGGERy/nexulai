@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { useUser, UserButton, SignOutButton } from '@clerk/nextjs';
-import { getUserSubscriptionStatus } from '@/lib/subscription-utils';
+import { useUser, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
+// import { getUserSubscriptionStatus } from '@/lib/subscription-utils';
 
 // Function to save report to database
 async function saveReportToDatabase(report: AnalysisResult) {
@@ -55,8 +56,7 @@ async function saveReportToDatabase(report: AnalysisResult) {
 
 // Types
 interface AnalysisResult {
-  type: string;
-  title?: string;
+  
   summary?: string;
   recommendations?: {
     title: string;
@@ -94,8 +94,10 @@ interface AnalysisResult {
     governanceStructure?: string;
   };
   timestamp: string;
-  data?: any;
+  data?: Record<string, unknown>;
   results?: string;
+  type: string;
+  title?: string;
 }
 
 interface FormData {
@@ -112,6 +114,11 @@ interface FormData {
   processes?: string;
   period?: string;
   costAreas?: string;
+  // Market Analysis Form fields
+  company?: string;
+  targetMarket?: string;
+  competitors?: string;
+  geography?: string;
 }
 
 type AnalysisType = 'market' | 'operations' | 'financial';
@@ -225,7 +232,7 @@ const createFallbackResult = (data: FormData | StrategyFormData): AnalysisResult
       timestamp: new Date().toLocaleString()
     };
   } else {
-    const formData = data as FormData;
+    // Use data directly without creating an unused variable
     return {
       type: 'Analysis Report',
       title: `Analysis Report: Business Analysis`,
@@ -514,15 +521,15 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <a href="/" className="text-xl sm:text-2xl font-bold text-purple-600">Nexus AI Consulting</a>
+              <Link href="/" className="text-xl sm:text-2xl font-bold text-purple-600">Nexus AI Consulting</Link>
               <div className="ml-2 sm:ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full">
                 Dashboard
               </div>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/solutions" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Solutions</a>
-                <a href="/reports" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">My Reports</a>
+                <Link href="/solutions" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Solutions</Link>
+                <Link href="/reports" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">My Reports</Link>
                 <a href="/dashboard" className="text-purple-600 px-3 py-2 text-sm font-medium border-b-2 border-purple-600">Dashboard</a>
                 <a href="/settings" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Settings</a>
                 {isLoaded && user && (
@@ -563,8 +570,8 @@ export default function Dashboard() {
         {mobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
-              <a href="/solutions" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Solutions</a>
-              <a href="/reports" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">My Reports</a>
+              <Link href="/solutions" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Solutions</Link>
+              <Link href="/reports" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">My Reports</Link>
               <a href="/dashboard" className="block px-3 py-2 text-base font-medium text-purple-600 bg-purple-50 rounded-md">Dashboard</a>
               <a href="/settings" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Settings</a>
               {isLoaded && user && (
@@ -607,7 +614,7 @@ export default function Dashboard() {
                 <div>
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-semibold text-black">Your Subscription Plan</h3>
-                    <div className="text-sm text-green-600">🚀 You're all set!</div>
+                    <div className="text-sm text-green-600">🚀 You&apos;re all set!</div>
                   </div>
                   <div className="flex items-center mb-3">
                     <div className={`w-3 h-3 rounded-full mr-2 ${subscriptionStatus.isSubscribed ? 'bg-green-500' : 'bg-blue-500'}`}></div>
@@ -1085,8 +1092,8 @@ function StrategyAnalysisForm({ onAnalyze, isAnalyzing }: {
             <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6">
               <h4 className="font-semibold text-purple-800 mb-2">McKinsey Senior Partner Analysis</h4>
               <p className="text-purple-700 text-sm">
-                I'll adopt the role of an expert McKinsey Senior Partner with 15+ years of experience leading Fortune 500 transformations. 
-                Let's establish your strategic foundation.
+                I&apos;ll adopt the role of an expert McKinsey Senior Partner with 15+ years of experience leading Fortune 500 transformations. 
+                Let&apos;s establish your strategic foundation.
               </p>
             </div>
             
@@ -1692,8 +1699,16 @@ function StrategyAnalysisForm({ onAnalyze, isAnalyzing }: {
   );
 }
 
+// Market Analysis Form Data Interface
+interface MarketAnalysisFormData {
+  company: string;
+  targetMarket: string;
+  competitors: string;
+  geography: string;
+}
+
 // Market Analysis Form Component
-function MarketAnalysisForm({ onAnalyze, isAnalyzing }: { onAnalyze: (type: string, data: any) => void, isAnalyzing: boolean }) {
+function MarketAnalysisForm({ onAnalyze, isAnalyzing }: { onAnalyze: (type: string, data: MarketAnalysisFormData) => Promise<void>, isAnalyzing: boolean }) {
   const [formData, setFormData] = useState({
     company: '',
     targetMarket: '',
@@ -1778,7 +1793,7 @@ function MarketAnalysisForm({ onAnalyze, isAnalyzing }: { onAnalyze: (type: stri
 }
 
 // Operations Analysis Form Component
-function OperationsAnalysisForm({ onAnalyze, isAnalyzing }: { onAnalyze: (type: string, data: any) => void, isAnalyzing: boolean }) {
+function OperationsAnalysisForm({ onAnalyze, isAnalyzing }: { onAnalyze: (type: string, data: FormData) => Promise<void>, isAnalyzing: boolean }) {
   const [formData, setFormData] = useState({
     company: '',
     department: '',
@@ -1866,7 +1881,7 @@ function OperationsAnalysisForm({ onAnalyze, isAnalyzing }: { onAnalyze: (type: 
 }
 
 // Financial Analysis Form Component
-function FinancialAnalysisForm({ onAnalyze, isAnalyzing }: { onAnalyze: (type: string, data: any) => void, isAnalyzing: boolean }) {
+function FinancialAnalysisForm({ onAnalyze, isAnalyzing }: { onAnalyze: (type: string, data: FormData) => Promise<void>, isAnalyzing: boolean }) {
   const [formData, setFormData] = useState({
     company: '',
     analysisType: '',

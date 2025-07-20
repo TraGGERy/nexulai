@@ -66,7 +66,7 @@ export async function PUT(request: NextRequest, context: { params: Promise<{ id:
     }
     
     const body = await request.json();
-    const updateData: Record<string, any> = {};
+    const updateData: Record<string, unknown> = {};
     
     // Validate and add fields to update
     if (body.title !== undefined) {
@@ -81,7 +81,7 @@ export async function PUT(request: NextRequest, context: { params: Promise<{ id:
     
     if (body.type !== undefined) {
       const validTypes = reportTypeEnum.enumValues;
-      if (!validTypes.includes(body.type as any)) {
+      if (!validTypes.includes(body.type as typeof reportTypeEnum.enumValues[number])) {
         return NextResponse.json({
           success: false,
           message: `Invalid report type. Valid types are: ${validTypes.join(', ')}`

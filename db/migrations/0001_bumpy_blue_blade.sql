@@ -1,0 +1,1 @@
+CREATE TYPE "public"."report_type" AS ENUM('strategy', 'market', 'financial', 'operations');

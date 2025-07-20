@@ -1,0 +1,1 @@
+ALTER TABLE "reports" ALTER COLUMN "type" SET DATA TYPE "public"."report_type" USING "type"::"public"."report_type";

@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Make placeholders black instead of default grey */
+::placeholder {
+  color: black !important;
+  opacity: 0.7;
+}

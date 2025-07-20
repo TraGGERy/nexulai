@@ -8,7 +8,7 @@ export default function DbTest() {
     success?: boolean;
     message?: string;
     error?: string;
-    data?: any;
+    data?: Record<string, unknown>;
   }>({ loading: true });
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function DbTest() {
             <h2 className="text-xl font-semibold text-green-700 mb-2">Connection Successful</h2>
             <p className="text-green-600 mb-4">{status.message}</p>
             
-            {status.data && status.data.length > 0 ? (
+            {status.data && Array.isArray(status.data) && status.data.length > 0 ? (
               <div>
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Data Preview:</h3>
                 <pre className="bg-gray-100 p-4 rounded overflow-auto max-h-60">

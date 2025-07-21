@@ -5,6 +5,12 @@ import { subscriptions, users } from '../../../../db/schema';
 import { eq } from 'drizzle-orm';
 import Stripe from 'stripe';
 
+// Define extended types for Stripe objects with Unix timestamp fields
+interface StripeSubscriptionWithTimestamps extends Stripe.Subscription {
+  current_period_start: number; // Unix timestamp
+  current_period_end: number; // Unix timestamp
+}
+
 // This endpoint is NOT protected by Clerk middleware
 // It needs to be accessible by Stripe for webhook events
 // The webhook URL should be: http://localhost:3002/webhook/stripe
@@ -79,8 +85,8 @@ export async function POST(request: NextRequest) {
               stripePriceId: subscription.items.data[0].price.id,
               plan: subscription.items.data[0].price.recurring?.interval === 'year' ? 'yearly' : 'monthly',
               status: subscription.status,
-              currentPeriodStart: new Date((subscription as any).current_period_start * 1000),
-              currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
+              currentPeriodStart: new Date((subscription as StripeSubscriptionWithTimestamps).current_period_start * 1000),
+              currentPeriodEnd: new Date((subscription as StripeSubscriptionWithTimestamps).current_period_end * 1000),
               cancelAtPeriodEnd: subscription.cancel_at_period_end,
               updatedAt: new Date(),
             })
@@ -95,8 +101,8 @@ export async function POST(request: NextRequest) {
               stripePriceId: subscription.items.data[0].price.id,
               plan: subscription.items.data[0].price.recurring?.interval === 'year' ? 'yearly' : 'monthly',
               status: subscription.status,
-              currentPeriodStart: new Date((subscription as any).current_period_start * 1000),
-              currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
+              currentPeriodStart: new Date((subscription as StripeSubscriptionWithTimestamps).current_period_start * 1000),
+              currentPeriodEnd: new Date((subscription as StripeSubscriptionWithTimestamps).current_period_end * 1000),
               cancelAtPeriodEnd: subscription.cancel_at_period_end,
             });
         }
@@ -120,8 +126,8 @@ export async function POST(request: NextRequest) {
         await db.update(subscriptions)
           .set({
             status: subscription.status,
-            currentPeriodStart: new Date((subscription as any).current_period_start * 1000),
-            currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
+            currentPeriodStart: new Date((subscription as StripeSubscriptionWithTimestamps).current_period_start * 1000),
+            currentPeriodEnd: new Date((subscription as StripeSubscriptionWithTimestamps).current_period_end * 1000),
             cancelAtPeriodEnd: subscription.cancel_at_period_end,
             updatedAt: new Date(),
           })

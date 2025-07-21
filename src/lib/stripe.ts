@@ -8,12 +8,12 @@ export const getServerStripe = () => {
   }
   
   return new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-    apiVersion: '2023-10-16' as any, // Use the latest API version
+    apiVersion: '2023-10-16' as Stripe.LatestApiVersion, // Use the latest API version
   });
 };
 
 // Initialize Stripe client-side instance
-let stripePromise: Promise<any> | null = null;
+let stripePromise: Promise<Stripe.Stripe | null> | null = null;
 export const getStripe = () => {
   if (!stripePromise) {
     stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);

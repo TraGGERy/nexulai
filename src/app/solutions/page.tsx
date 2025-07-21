@@ -256,7 +256,7 @@ export default function Solutions() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">Industry-Specific Solutions</h2>
             <p className="mt-4 text-xl text-gray-600">
-              Tailored AI consulting for your industry's unique challenges
+              Tailored AI consulting for your industry&apos;s unique challenges
             </p>
           </div>
 

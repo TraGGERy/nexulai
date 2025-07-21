@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useUser, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
 
 export default function Settings() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -132,7 +133,7 @@ export default function Settings() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <a href="/" className="text-xl sm:text-2xl font-bold text-purple-600">Nexus AI Consulting</a>
+              <Link href="/" className="text-xl sm:text-2xl font-bold text-purple-600">Nexus AI Consulting</Link>
               <div className="ml-2 sm:ml-3 px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">
                 Settings
               </div>
@@ -140,7 +141,7 @@ export default function Settings() {
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
                 <a href="/solutions" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Solutions</a>
-                <a href="/reports" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">My Reports</a>
+                <Link href="/reports" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">My Reports</Link>
                 <a href="/dashboard" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Dashboard</a>
                 <a href="/settings" className="text-purple-600 px-3 py-2 text-sm font-medium border-b-2 border-purple-600">Settings</a>
                 {isLoaded && user && (
@@ -182,7 +183,7 @@ export default function Settings() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
               <a href="/solutions" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Solutions</a>
-              <a href="/reports" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">My Reports</a>
+              <Link href="/reports" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">My Reports</Link>
               <a href="/dashboard" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Dashboard</a>
               <a href="/settings" className="block px-3 py-2 text-base font-medium text-purple-600 bg-purple-50 rounded-md">Settings</a>
               {isLoaded && user && (
@@ -309,7 +310,7 @@ export default function Settings() {
                   <div className="pt-2">
                     {subscriptionStatus.plan === 'free' ? (
                       <div className="text-xs text-gray-500">
-                        You're currently on the free tier with {subscriptionStatus.dailyReportsLimit} reports per day.
+                        You&apos;re currently on the free tier with {subscriptionStatus.dailyReportsLimit} reports per day.
                       </div>
                     ) : (
                       <div className="text-xs text-green-600">
@@ -443,12 +444,12 @@ export default function Settings() {
                 >
                   Go to Dashboard
                 </a>
-                <a 
+                <Link 
                   href="/reports" 
                   className="block w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors text-center"
                 >
                   View My Reports
-                </a>
+                </Link>
                 <a 
                   href="/solutions" 
                   className="block w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors text-center"

@@ -4,11 +4,46 @@ import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+interface ReportContent {
+  summary?: string;
+  insights?: string[];
+  recommendations?: Recommendation[];
+  metrics?: Record<string, string | number>;
+  implementationRoadmap?: {
+    quickWins?: RoadmapItem[];
+    strategicInitiatives?: RoadmapItem[];
+    transformationMilestones?: RoadmapItem[];
+    riskMonitoring?: RiskItem[];
+    governanceStructure?: string;
+  };
+}
+
+interface Recommendation {
+  title: string;
+  priority: string;
+  impact: string;
+  description: string;
+  timeline: string;
+}
+
+interface RoadmapItem {
+  title: string;
+  description: string;
+  timeline: string;
+  kpis?: string[];
+}
+
+interface RiskItem {
+  risk: string;
+  mitigation: string;
+  indicator: string;
+}
+
 interface Report {
   id: number;
   title: string;
   type: string;
-  content: any;
+  content: ReportContent;
   createdAt: string;
   updatedAt: string;
 }
@@ -210,7 +245,7 @@ export default function ReportDetail({ params }: { params: Promise<{ id: string 
                   <div className="mb-8">
                     <h2 className="text-xl font-semibold text-gray-900 mb-3">Recommendations</h2>
                     <div className="space-y-4">
-                      {report.content.recommendations.map((rec: any, index: number) => (
+                      {report.content.recommendations.map((rec: Recommendation, index: number) => (
                         <div key={index} className="bg-gray-50 p-4 rounded-lg">
                           <div className="flex justify-between items-start">
                             <h3 className="text-lg font-medium text-gray-900">{rec.title}</h3>
@@ -233,7 +268,7 @@ export default function ReportDetail({ params }: { params: Promise<{ id: string 
                   <div className="mb-8">
                     <h2 className="text-xl font-semibold text-gray-900 mb-3">Key Metrics</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {Object.entries(report.content.metrics).map(([key, value]: [string, any]) => (
+                      {Object.entries(report.content.metrics).map(([key, value]: [string, string | number]) => (
                         <div key={key} className="bg-gray-50 p-4 rounded-lg">
                           <h3 className="text-sm font-medium text-gray-500">{key}</h3>
                           <p className="text-lg font-semibold text-gray-900 mt-1">{value}</p>
@@ -251,7 +286,7 @@ export default function ReportDetail({ params }: { params: Promise<{ id: string 
                       <div className="mb-6">
                         <h3 className="text-lg font-medium text-gray-900 mb-2">Quick Wins (90 Days)</h3>
                         <div className="space-y-3">
-                          {report.content.implementationRoadmap.quickWins.map((item: any, index: number) => (
+                          {report.content.implementationRoadmap.quickWins.map((item: RoadmapItem, index: number) => (
                             <div key={index} className="bg-gray-50 p-4 rounded-lg">
                               <h4 className="font-medium text-gray-900">{item.title}</h4>
                               <p className="text-gray-700 mt-1">{item.description}</p>
@@ -276,7 +311,7 @@ export default function ReportDetail({ params }: { params: Promise<{ id: string 
                       <div className="mb-6">
                         <h3 className="text-lg font-medium text-gray-900 mb-2">Strategic Initiatives (6 Months)</h3>
                         <div className="space-y-3">
-                          {report.content.implementationRoadmap.strategicInitiatives.map((item: any, index: number) => (
+                          {report.content.implementationRoadmap.strategicInitiatives.map((item: RoadmapItem, index: number) => (
                             <div key={index} className="bg-gray-50 p-4 rounded-lg">
                               <h4 className="font-medium text-gray-900">{item.title}</h4>
                               <p className="text-gray-700 mt-1">{item.description}</p>
@@ -301,7 +336,7 @@ export default function ReportDetail({ params }: { params: Promise<{ id: string 
                       <div className="mb-6">
                         <h3 className="text-lg font-medium text-gray-900 mb-2">Transformation Milestones (12 Months)</h3>
                         <div className="space-y-3">
-                          {report.content.implementationRoadmap.transformationMilestones.map((item: any, index: number) => (
+                          {report.content.implementationRoadmap.transformationMilestones.map((item: RoadmapItem, index: number) => (
                             <div key={index} className="bg-gray-50 p-4 rounded-lg">
                               <h4 className="font-medium text-gray-900">{item.title}</h4>
                               <p className="text-gray-700 mt-1">{item.description}</p>
@@ -335,7 +370,7 @@ export default function ReportDetail({ params }: { params: Promise<{ id: string 
                               </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                              {report.content.implementationRoadmap.riskMonitoring.map((item: any, index: number) => (
+                              {report.content.implementationRoadmap.riskMonitoring.map((item: RiskItem, index: number) => (
                                 <tr key={index}>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.risk}</td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.mitigation}</td>

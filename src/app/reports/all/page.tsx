@@ -3,11 +3,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+interface ReportContent {
+  summary?: string;
+  // Add other potential properties based on how content is used
+}
+
 interface Report {
   id: number;
   title: string;
   type: string;
-  content: any;
+  content: ReportContent;
   createdAt: string;
   updatedAt: string;
 }
@@ -142,7 +147,7 @@ export default function AllReportsPage() {
           <div className="bg-gray-50 p-8 rounded-lg text-center">
             <h2 className="text-xl font-semibold text-gray-700 mb-4">No Reports Found</h2>
             <p className="text-gray-600 mb-6">
-              You haven't created any reports yet. Generate your first report from the dashboard.
+              You haven&apos;t created any reports yet. Generate your first report from the dashboard.
             </p>
             <Link 
               href="/dashboard" 

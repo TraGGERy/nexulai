@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import { PLAN_PRICES } from '@/lib/stripe';
+import Link from 'next/link';
 
 export default function Pricing() {
   const router = useRouter();
@@ -24,11 +25,11 @@ export default function Pricing() {
     cancelAtPeriodEnd: false,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [_error, setError] = useState<string | null>(null);
   
   // Check for success or canceled URL parameters
-  const success = searchParams.get('success');
-  const canceled = searchParams.get('canceled');
+  const _success = searchParams.get('success');
+  const _canceled = searchParams.get('canceled');
   
   // Fetch user's subscription status
   useEffect(() => {
@@ -105,12 +106,12 @@ export default function Pricing() {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                <a href="/solutions" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Solutions</a>
-                <a href="/ai-tools" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">AI Tools</a>
-                <a href="/pricing" className="text-purple-600 px-3 py-2 text-sm font-medium border-b-2 border-purple-600">Pricing</a>
-                <a href="/dashboard" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Dashboard</a>
+                <Link href="/solutions" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Solutions</Link>
+                <Link href="/ai-tools" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">AI Tools</Link>
+                <Link href="/pricing" className="text-purple-600 px-3 py-2 text-sm font-medium border-b-2 border-purple-600">Pricing</Link>
+                <Link href="/dashboard" className="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Dashboard</Link>
                 {!user && (
-                  <a href="/sign-up" className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-700">Start Free Analysis</a>
+                  <Link href="/sign-up" className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-700">Start Free Analysis</Link>
                 )}
               </div>
             </div>
@@ -138,12 +139,12 @@ export default function Pricing() {
         {mobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
-              <a href="/solutions" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Solutions</a>
-              <a href="/ai-tools" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">AI Tools</a>
-              <a href="/pricing" className="block px-3 py-2 text-base font-medium text-purple-600 hover:bg-purple-50 rounded-md">Pricing</a>
-              <a href="/dashboard" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Dashboard</a>
+              <Link href="/solutions" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Solutions</Link>
+              <Link href="/ai-tools" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">AI Tools</Link>
+              <Link href="/pricing" className="block px-3 py-2 text-base font-medium text-purple-600 hover:bg-purple-50 rounded-md">Pricing</Link>
+              <Link href="/dashboard" className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-purple-600 hover:bg-purple-50 rounded-md">Dashboard</Link>
               {!user && (
-                <a href="/sign-up" className="block px-3 py-2 text-base font-medium bg-purple-600 text-white hover:bg-purple-700 rounded-md">Start Free Analysis</a>
+                <Link href="/sign-up" className="block px-3 py-2 text-base font-medium bg-purple-600 text-white hover:bg-purple-700 rounded-md">Start Free Analysis</Link>
               )}
             </div>
           </div>
@@ -157,8 +158,8 @@ export default function Pricing() {
             Simple, Transparent <span className="text-purple-600">Pricing</span>
           </h1>
           <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-            No hidden fees, no long-term contracts, no expensive consultants. Pay only for the AI insights you need.
-          </p>
+              No hidden fees, no long-term contracts, no expensive consultants. Pay only for the AI insights you need.
+            </p>
           <div className="mt-8 flex justify-center">
             <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">
               💰 Save 99% vs Traditional Consulting • ⚡ Get Results in 15 Minutes
@@ -253,7 +254,7 @@ export default function Pricing() {
                 )}
               </div>
               <div className="mt-8">
-                <h4 className="font-semibold text-gray-900 mb-4">What's included:</h4>
+                <h4 className="font-semibold text-gray-900 mb-4">What&apos;s included:</h4>
                 <ul className="space-y-3">
                   <li className="flex items-center">
                     <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -515,11 +516,11 @@ export default function Pricing() {
             </div>
             <div className="border-b border-gray-200 pb-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">What happens when I cancel my subscription?</h3>
-              <p className="text-gray-600">When you cancel, your subscription will remain active until the end of your current billing period. After that, you'll be downgraded to the free plan with a limit of 1 report per day.</p>
+              <p className="text-gray-600">When you cancel, your subscription will remain active until the end of your current billing period. After that, you&apos;ll be downgraded to the free plan with a limit of 1 report per day.</p>
             </div>
             <div className="border-b border-gray-200 pb-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">What if I'm not satisfied with the results?</h3>
-              <p className="text-gray-600">We offer a 30-day money-back guarantee. If you're not completely satisfied with our AI insights, we'll refund your payment.</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">What if I&apos;m not satisfied with the results?</h3>
+              <p className="text-gray-600">We offer a 30-day money-back guarantee. If you&apos;re not completely satisfied with our AI insights, we&apos;ll refund your payment.</p>
             </div>
             <div className="border-b border-gray-200 pb-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">How accurate is the AI analysis?</h3>

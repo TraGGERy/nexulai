@@ -1,4 +1,4 @@
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe, Stripe as StripeClient } from '@stripe/stripe-js';
 import Stripe from 'stripe';
 
 // Initialize Stripe server-side instance (only on server)
@@ -13,7 +13,7 @@ export const getServerStripe = () => {
 };
 
 // Initialize Stripe client-side instance
-let stripePromise: Promise<Stripe.Stripe | null> | null = null;
+let stripePromise: Promise<StripeClient | null> | null = null;
 export const getStripe = () => {
   if (!stripePromise) {
     stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);

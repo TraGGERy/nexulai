@@ -1,9 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { getServerStripe } from '@/lib/stripe';
 import { db } from '../../../../../db';
 import { subscriptions, users } from '../../../../../db/schema';
 import { eq } from 'drizzle-orm';
 import Stripe from 'stripe';
+
+// Define extended types for Stripe objects with Unix timestamp fields
+type StripeSubscriptionWithTimestamps = Stripe.Subscription & {
+  current_period_start: number; // Unix timestamp
+  current_period_end: number; // Unix timestamp
+};
+
+// Helper function to safely convert Stripe.Subscription to StripeSubscriptionWithTimestamps
+function convertToSubscriptionWithTimestamps(subscription: Stripe.Subscription): StripeSubscriptionWithTimestamps {
+  // First cast to unknown, then to our custom type as recommended by TypeScript
+  return subscription as unknown as StripeSubscriptionWithTimestamps;
+}
 
 // This endpoint is NOT protected by Clerk middleware
 // It needs to be accessible by Stripe for webhook events
@@ -71,6 +84,9 @@ export async function POST(request: NextRequest) {
           .from(subscriptions)
           .where(eq(subscriptions.userId, user.id));
         
+        // Convert subscription to our extended type
+        const subWithTimestamps = convertToSubscriptionWithTimestamps(subscription);
+        
         if (existingSubscription && existingSubscription.length > 0) {
           // Update existing subscription
           await db.update(subscriptions)
@@ -79,8 +95,8 @@ export async function POST(request: NextRequest) {
               stripePriceId: subscription.items.data[0].price.id,
               plan: subscription.items.data[0].price.recurring?.interval === 'year' ? 'yearly' : 'monthly',
               status: subscription.status,
-              currentPeriodStart: new Date(subscription.items.data[0].current_period_start * 1000),
-              currentPeriodEnd: new Date(subscription.items.data[0].current_period_end * 1000),
+              currentPeriodStart: new Date(subWithTimestamps.current_period_start * 1000),
+              currentPeriodEnd: new Date(subWithTimestamps.current_period_end * 1000),
               cancelAtPeriodEnd: subscription.cancel_at_period_end,
               updatedAt: new Date(),
             })
@@ -95,8 +111,8 @@ export async function POST(request: NextRequest) {
               stripePriceId: subscription.items.data[0].price.id,
               plan: subscription.items.data[0].price.recurring?.interval === 'year' ? 'yearly' : 'monthly',
               status: subscription.status,
-              currentPeriodStart: new Date(subscription.items.data[0].current_period_start * 1000),
-              currentPeriodEnd: new Date(subscription.items.data[0].current_period_end * 1000),
+              currentPeriodStart: new Date(subWithTimestamps.current_period_start * 1000),
+              currentPeriodEnd: new Date(subWithTimestamps.current_period_end * 1000),
               cancelAtPeriodEnd: subscription.cancel_at_period_end,
             });
         }
@@ -116,12 +132,15 @@ export async function POST(request: NextRequest) {
           throw new Error(`Subscription not found for ID: ${subscription.id}`);
         }
         
+        // Convert subscription to our extended type
+        const subWithTimestamps = convertToSubscriptionWithTimestamps(subscription);
+        
         // Update subscription record
         await db.update(subscriptions)
           .set({
             status: subscription.status,
-            currentPeriodStart: new Date(subscription.items.data[0].current_period_start * 1000),
-            currentPeriodEnd: new Date(subscription.items.data[0].current_period_end * 1000),
+            currentPeriodStart: new Date(subWithTimestamps.current_period_start * 1000),
+            currentPeriodEnd: new Date(subWithTimestamps.current_period_end * 1000),
             cancelAtPeriodEnd: subscription.cancel_at_period_end,
             updatedAt: new Date(),
           })

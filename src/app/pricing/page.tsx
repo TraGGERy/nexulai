@@ -1,14 +1,28 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import { PLAN_PRICES } from '@/lib/stripe';
 import Link from 'next/link';
 
+// Component that uses searchParams wrapped in Suspense
+function SearchParamsHandler() {
+  const searchParams = useSearchParams();
+  const success = searchParams.get('success');
+  const canceled = searchParams.get('canceled');
+  
+  return (
+    <>
+      {/* This component just reads URL params and passes them to parent via context or props */}
+      <input type="hidden" id="success-param" value={success || ''} />
+      <input type="hidden" id="canceled-param" value={canceled || ''} />
+    </>
+  );
+}
+
 export default function Pricing() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { user, isLoaded } = useUser();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState<{
@@ -26,10 +40,23 @@ export default function Pricing() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [_error, setError] = useState<string | null>(null);
+  const [urlParams, setUrlParams] = useState<{success: string | null, canceled: string | null}>({
+    success: null,
+    canceled: null
+  });
   
-  // Check for success or canceled URL parameters
-  const _success = searchParams.get('success');
-  const _canceled = searchParams.get('canceled');
+  // Effect to read the URL parameters from the hidden inputs after they're populated
+  useEffect(() => {
+    const successParam = document.getElementById('success-param') as HTMLInputElement;
+    const canceledParam = document.getElementById('canceled-param') as HTMLInputElement;
+    
+    if (successParam && canceledParam) {
+      setUrlParams({
+        success: successParam.value || null,
+        canceled: canceledParam.value || null
+      });
+    }
+  }, []);
   
   // Fetch user's subscription status
   useEffect(() => {
@@ -94,6 +121,10 @@ export default function Pricing() {
   
   return (
     <div className="min-h-screen bg-white">
+      {/* Suspense boundary for SearchParams */}
+      <Suspense fallback={<div>Loading URL parameters...</div>}>
+        <SearchParamsHandler />
+      </Suspense>
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

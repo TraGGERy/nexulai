@@ -22,11 +22,11 @@ export async function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nexus AI Consulting</title>
-    <link>https://nexusaiconsulting.com</link>
+    <link>https://nexusmarketai.xyz</link>
     <description>Revolutionary AI-powered consulting platform delivering McKinsey-quality insights in just 15 minutes.</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <atom:link href="https://nexusaiconsulting.com/api/rss" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nexusmarketai.xyz/api/rss" rel="self" type="application/rss+xml" />
     ${recentReports.map((report) => {
       // Parse the content to extract a summary
       let summary = '';
@@ -47,8 +47,8 @@ export async function GET() {
       return `
     <item>
       <title>${escapeXml(report.title)}</title>
-      <link>https://nexusaiconsulting.com/reports/${report.id}</link>
-      <guid>https://nexusaiconsulting.com/reports/${report.id}</guid>
+      <link>https://nexusmarketai.xyz/reports/${report.id}</link>
+      <guid>https://nexusmarketai.xyz/reports/${report.id}</guid>
       <pubDate>${new Date(report.createdAt).toUTCString()}</pubDate>
       <category>${escapeXml(report.type)}</category>
       <description>${escapeXml(summary)}</description>

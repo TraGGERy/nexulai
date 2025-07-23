@@ -27,7 +27,7 @@ const generateSitemap = () => {
 ${routes
   .map(
     (route) => `  <url>
-    <loc>https://nexusaiconsulting.com${route.url}</loc>
+    <loc>https://nexusmarketai.xyz${route.url}</loc>
     <lastmod>${route.lastmod}</lastmod>
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>

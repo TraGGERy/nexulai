@@ -30,7 +30,7 @@ export async function getReportEntries(): Promise<SitemapEntry[]> {
 
     // Create entries for dynamic report routes
     return reportIds.map((report: ReportEntry) => ({
-      url: `https://nexusaiconsulting.com/reports/${report.id}`,
+      url: `https://nexusmarketai.xyz/reports/${report.id}`,
       lastModified: new Date(report.updatedAt),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
@@ -50,25 +50,25 @@ export function getStaticEntries(): SitemapEntry[] {
   
   return [
     {
-      url: 'https://nexusaiconsulting.com',
+      url: 'https://nexusmarketai.xyz',
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 1.0,
     },
     {
-      url: 'https://nexusaiconsulting.com/solutions',
+      url: 'https://nexusmarketai.xyz/solutions',
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: 'https://nexusaiconsulting.com/ai-tools',
+      url: 'https://nexusmarketai.xyz/ai-tools',
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: 'https://nexusaiconsulting.com/pricing',
+      url: 'https://nexusmarketai.xyz/pricing',
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.9,

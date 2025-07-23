@@ -11,4 +11,4 @@ Disallow: /sign-in/
 Disallow: /sign-up/
 
 # Sitemap location
-Sitemap: https://nexusaiconsulting.com/sitemap.xml
+Sitemap: https://nexusmarketai.xyz/sitemap.xml

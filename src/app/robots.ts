@@ -14,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         '/sign-up/',
       ],
     },
-    sitemap: 'https://nexusaiconsulting.com/sitemap.xml',
+    sitemap: 'https://nexusmarketai.xyz/sitemap.xml',
   };
 }

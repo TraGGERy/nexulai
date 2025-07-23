@@ -9,7 +9,9 @@
     "lint": "next lint",
     "db:migrate": "tsx db/migrate.ts",
     "db:generate": "drizzle-kit generate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
+    "prebuild": "npm run generate:sitemap"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.25.4",

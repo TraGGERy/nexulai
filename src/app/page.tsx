@@ -4,13 +4,29 @@
 import { useState } from "react";
 import { useUser } from '@clerk/nextjs';
 import Link from 'next/link';
+import StructuredData, { 
+  generateOrganizationSchema, 
+  generateWebsiteSchema, 
+  generateServiceSchema, 
+  generateFaqSchema,
+  usePageSchema
+} from './components/StructuredData';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, isLoaded } = useUser();
 
+  // Get page-specific schema
+  const pageSchema = usePageSchema();
+  
   return (
     <div className="min-h-screen bg-white">
+      {/* Structured Data */}
+      <StructuredData data={generateOrganizationSchema()} />
+      <StructuredData data={generateWebsiteSchema()} />
+      <StructuredData data={generateServiceSchema()} />
+      <StructuredData data={generateFaqSchema()} />
+      {pageSchema && <StructuredData data={pageSchema} />}
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

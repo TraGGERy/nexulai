@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="128" fill="#6D28D9" />
+  
+  <!-- Letter N -->
+  <path d="M160 128H200V384H160V128Z" fill="white" />
+  <path d="M160 128H200L352 384H312L160 128Z" fill="white" />
+  <path d="M312 128H352V384H312V128Z" fill="white" />
+  
+  <!-- AI Badge -->
+  <circle cx="384" cy="128" r="64" fill="#10B981" />
+  <text x="384" y="148" font-family="Arial, sans-serif" font-weight="bold" font-size="48" fill="white" text-anchor="middle">AI</text>
+</svg>

@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
 import { PLAN_PRICES } from '@/lib/stripe';
 import Link from 'next/link';
+import SocialShare from '../components/SocialShare';
 
 // Component that uses searchParams wrapped in Suspense
 function SearchParamsHandler() {
@@ -584,6 +585,17 @@ export default function Pricing() {
             >
               {isLoading ? 'Processing...' : user ? 'Subscribe Monthly' : 'Sign in to Subscribe'}
             </button>
+          </div>
+          
+          {/* Social Share */}
+          <div className="mt-8 flex justify-center">
+            <div className="bg-white rounded-full px-6 py-3 shadow-lg">
+              <SocialShare 
+                title="Affordable AI Consulting Plans - Save 99% on Consulting Costs"
+                description="Revolutionary AI-powered consulting platform delivering McKinsey-quality insights in just 15 minutes at 1/100th the cost."
+                hashtags={['AIConsulting', 'AffordableStrategy', 'BusinessIntelligence']}
+              />
+            </div>
           </div>
         </div>
       </section>

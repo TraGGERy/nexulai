@@ -1,0 +1,13 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="8" fill="#6D28D9" />
+  
+  <!-- Letter N -->
+  <path d="M10 8H12V24H10V8Z" fill="white" />
+  <path d="M10 8H12L22 24H20L10 8Z" fill="white" />
+  <path d="M20 8H22V24H20V8Z" fill="white" />
+  
+  <!-- AI Badge -->
+  <circle cx="24" cy="8" r="4" fill="#10B981" />
+  <text x="24" y="10" font-family="Arial, sans-serif" font-weight="bold" font-size="4" fill="white" text-anchor="middle">AI</text>
+</svg>

@@ -1,0 +1,14 @@
+# Robots.txt file for Nexus AI Consulting
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /dashboard/
+Disallow: /reports/
+Disallow: /settings/
+Disallow: /api/
+Disallow: /sign-in/
+Disallow: /sign-up/
+
+# Sitemap location
+Sitemap: https://nexusaiconsulting.com/sitemap.xml

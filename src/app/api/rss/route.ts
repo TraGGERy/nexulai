@@ -27,7 +27,7 @@ export async function GET() {
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="https://nexusaiconsulting.com/api/rss" rel="self" type="application/rss+xml" />
-    ${recentReports.map((report: any) => {
+    ${recentReports.map((report) => {
       // Parse the content to extract a summary
       let summary = '';
       try {

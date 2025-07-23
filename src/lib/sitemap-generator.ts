@@ -22,8 +22,14 @@ export async function getReportEntries(): Promise<SitemapEntry[]> {
       .orderBy(desc(reports.createdAt))
       .limit(1000);
 
+    // Define interface for report object
+    interface ReportEntry {
+      id: number;
+      updatedAt: Date;
+    }
+
     // Create entries for dynamic report routes
-    return reportIds.map((report: any) => ({
+    return reportIds.map((report: ReportEntry) => ({
       url: `https://nexusaiconsulting.com/reports/${report.id}`,
       lastModified: new Date(report.updatedAt),
       changeFrequency: 'monthly' as const,

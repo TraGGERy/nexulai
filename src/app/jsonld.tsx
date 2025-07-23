@@ -1,6 +1,13 @@
 import React from 'react';
 
-export default function JsonLd({ jsonLd }: { jsonLd: Record<string, any> }) {
+// Define a type for JSON-LD structured data
+type JsonLdType = {
+  '@context': string;
+  '@type': string;
+  [key: string]: unknown;
+};
+
+export default function JsonLd({ jsonLd }: { jsonLd: JsonLdType }) {
   return (
     <script
       type="application/ld+json"

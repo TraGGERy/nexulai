@@ -3,8 +3,15 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+// Define a more specific type for JSON-LD structured data
+type JsonLdType = {
+  '@context': string;
+  '@type': string;
+  [key: string]: unknown;
+};
+
 interface StructuredDataProps {
-  data: Record<string, any>;
+  data: JsonLdType;
 }
 
 export default function StructuredData({ data }: StructuredDataProps) {
@@ -129,7 +136,7 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
 
 export function usePageSchema() {
   const pathname = usePathname();
-  const [schema, setSchema] = useState<Record<string, any> | null>(null);
+  const [schema, setSchema] = useState<JsonLdType | null>(null);
 
   useEffect(() => {
     // Generate different schema based on the current page
